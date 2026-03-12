@@ -28,6 +28,7 @@ Colors are lazily using the Tailwind color palette
 
 To create the brand logo in HTML you can just type: "•fortrabbit" — bullet character, a normal space and then name of the company. Use the Georgia Typeface in bold and italic.
 
+
 ## Logo usage
 
 - Use lot's of whitespace around the logo
