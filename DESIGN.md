@@ -12,7 +12,7 @@ agent that reads only this file still gets them right.
   palettes, focus.
 - **[Application & website rules](docs/web.md)** — typography, sizing, spacing, corners,
   and how a separate build matches the look.
-- **[`fortrabbit-theme.css`](fortrabbit-theme.css)** — drop-in Tailwind v4 theme with the
+- **[`fortrabbit-theme.css`](assets/fortrabbit-theme.css)** — drop-in Tailwind v4 theme with the
   exact values for all four roles (`50`…`950`), the alternate palettes, and dark mode.
 
 ## Essentials
@@ -33,7 +33,7 @@ Always pair light with dark (`bg-main-100 dark:bg-main-900`).
 | `move`   | indigo        | On-page interactivity, alternate accent        | `#6366f1` · `oklch(0.585 0.233 277.117)` |
 
 `yellow` (`#fde047`) is a standalone alert color — not a role. Full values and themes:
-[`fortrabbit-theme.css`](fortrabbit-theme.css) · details in [tokens.md](docs/tokens.md).
+[`fortrabbit-theme.css`](assets/fortrabbit-theme.css) · details in [tokens.md](docs/tokens.md).
 
 ### Link vs move
 

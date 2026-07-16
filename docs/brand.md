@@ -8,7 +8,7 @@ see the [application rules](web.md); for the color system, see [color tokens](to
 
 The brand is expressed through four color roles. These are their canonical **anchor**
 values — the full scales, dark mode, and alternate themes live in [tokens.md](tokens.md)
-and ship as exact values in [`../fortrabbit-theme.css`](../fortrabbit-theme.css).
+and ship as exact values in [`fortrabbit-theme.css`](../assets/fortrabbit-theme.css).
 
 - **link** — fuchsia · `#d946ef` · `oklch(0.667 0.295 322.15)`
 - **accent** — cyan · `#22d3ee` · `oklch(0.789 0.154 211.53)`

@@ -1,7 +1,7 @@
 # fortrabbit — Application & website rules
 
 How to build a website or app that matches the fortrabbit look. Assumes Tailwind v4 with
-[`../fortrabbit-theme.css`](../fortrabbit-theme.css) imported; the color roles it provides
+[`fortrabbit-theme.css`](../assets/fortrabbit-theme.css) imported; the color roles it provides
 are documented in [tokens.md](tokens.md). Brand identity (logo, wordmark, naming, tone) is
 in [brand.md](brand.md).
 

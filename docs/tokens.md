@@ -2,7 +2,7 @@
 
 The color system for building fortrabbit-styled UI. Brand-level color anchors are in
 [brand.md](brand.md); the exact values (all scales + themes) ship as a drop-in Tailwind v4
-stylesheet, [`../fortrabbit-theme.css`](../fortrabbit-theme.css).
+stylesheet, [`fortrabbit-theme.css`](../assets/fortrabbit-theme.css).
 
 ## Roles, not raw colors
 
@@ -20,7 +20,7 @@ That indirection is what lets the alternate palettes and dark mode swap cleanly.
 `yellow` (e.g. `yellow-300` · `#fde047`) stays a standalone alert / attention color — it is
 not a role.
 
-Import [`../fortrabbit-theme.css`](../fortrabbit-theme.css) after Tailwind and you get the
+Import [`fortrabbit-theme.css`](../assets/fortrabbit-theme.css) after Tailwind and you get the
 role tokens directly. A non-Tailwind build can read the same file as a reference table.
 
 ## Link vs move — the one rule to get right
@@ -41,7 +41,7 @@ Tailwind.
 - Three alternate palettes — `dry` (desaturated warm), `fancy` (warm/olive), `contrast`
   (high-contrast, blue-forward) — are full role swaps toggled by a class on the root
   element. Optional; only wire them up if the build wants theme switching. Exact per-step
-  values are in [`../fortrabbit-theme.css`](../fortrabbit-theme.css).
+  values are in [`fortrabbit-theme.css`](../assets/fortrabbit-theme.css).
 
 ## Focus
 
