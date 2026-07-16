@@ -59,7 +59,12 @@ The exact per-step oklch values for the three alt palettes are transcribed from
 ### 2. `DESIGN.md` (expand existing)
 
 Keep the current sections (brand intro, wordmark, square marks, elevation, do/don't).
-Add or expand:
+Add or expand the sections below.
+
+**Tone:** aim for "roughly follow," not a rulebook. Convey the schemes — which role does
+what, the shape of the type/size/spacing/corner systems — and let the consuming build fill
+in specifics. Avoid over-prescribing exact shades, pixel values, or product-only class
+names; the exact palette values live in `fortrabbit-theme.css` for anyone who wants them.
 
 #### Colors → replace the current flat 4-color list with **role-based tokens**
 
@@ -81,12 +86,19 @@ Add or expand:
   in `fortrabbit-theme.css`; describe each in a sentence (dry = desaturated warm; fancy =
   warm/olive-leaning; contrast = high-contrast blue-forward accessibility theme).
 
-#### Semantic color rule (new)
+#### Link vs move — the key color rule (new)
 
-- `link` (and a `.f-link` class, if the build defines one) is **only** for links that
-  navigate to another page.
-- On-page interactions — sorting, toggles, expanders, filters — use `move`:
-  `text-move-700 dark:text-move-300`, hover `text-move-900 dark:text-move-100`.
+Two roles carry interactivity, and keeping them apart is the single most important scheme
+to get across:
+
+- **`link`** — actual links that navigate to another page.
+- **`move`** — on-page interactivity: sorting, toggles, expanders, filters, in-place
+  actions.
+
+Use the role tokens directly with Tailwind (`text-link-600`, `text-move-700`, …). The
+product has a `.f-link` helper, but it may be dropped in favour of using Tailwind directly,
+so an outside build should not depend on it — reach for the `link` tokens. Keep the guidance
+at the level of "which role for what," not exact shades.
 
 #### Typography (expand)
 
@@ -113,13 +125,17 @@ Add or expand:
   bespoke values.
 - Keep the existing logo clear-space / adjacency guidance.
 
-#### Focus & elevation (expand)
+#### Corners, focus & elevation (expand)
 
-- **Focus** is accent-based. Give the portable recipe:
-  `focus:outline-accent-400/30 dark:focus:outline-accent-600/30 outline-offset-1 focus:outline-2`
-  (and note the `f-focus`, `f-focus-border`, `f-focus-input`, `f-focus-text` utility
-  patterns from `f-focus.css` as reference recipes an outside build can recreate).
-- **Elevation:** brand is flat — no shadows/glows on logo or marks (existing).
+- **Rounded corners:** the UI is gently rounded, never sharp. Default to a small radius
+  (`rounded` / `rounded-sm`) for most elements, `rounded-md` / `rounded-lg` for cards and
+  larger surfaces, and `rounded-full` only for circular things (avatars, pills, status
+  dots). The square brand mark also ships a `-rounded` variant. Don't mix wildly different
+  radii in one composition. Keep this as guidance, not a rigid scale.
+- **Focus** is accent-based — an accent outline with a small offset, e.g.
+  `focus:outline-accent-400/30 dark:focus:outline-accent-600/30 outline-offset-1 focus:outline-2`.
+  Treat it as a pattern to reproduce, not a fixed class to import.
+- **Elevation:** brand is flat — no shadows or glows on logo or marks (existing).
 
 #### Conventions note (new, short)
 
