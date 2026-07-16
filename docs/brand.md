@@ -14,7 +14,7 @@ and ship as exact values in [`fortrabbit-theme.css`](../assets/fortrabbit-theme.
 - **accent** — cyan · `#22d3ee` · `oklch(0.789 0.154 211.53)`
 - **move** (alternate accent) — indigo · `#6366f1` · `oklch(0.585 0.233 277.117)`
 - **alert** — yellow · `#fde047` — standalone attention color, not a role.
-- **Neutrals** — pure black `#000` and white `#fff` (see `../fortrabbit-logo-bw.svg`).
+- **Neutrals** — pure black `#000` and white `#fff` (see `../assets/fortrabbit-logo-bw.svg`).
 
 Don't introduce colors outside these for brand-level usage.
 
@@ -23,7 +23,7 @@ Don't introduce colors outside these for brand-level usage.
 - **HTML form** — type a bullet, a regular space, then the company name: `•fortrabbit`.
 - **Typography** — Georgia, **bold italic**. Never recreated in another typeface, weight,
   or style; never used for body text.
-- **File** — `../fortrabbit-logo-bw.svg` (black & white master).
+- **File** — `../assets/fortrabbit-logo-bw.svg` (black & white master).
 - **Clear space** — generous whitespace on all sides. No exact ratio is mandated; err
   toward more. No other text or graphic sits inside the clear-space buffer.
 
@@ -33,7 +33,7 @@ Square app/social marks for avatars, favicons, and tiles.
 
 - **Variants** — `accent` (cyan), `alert` (yellow), `alternate` (indigo), `colorful`, `link` (fuchsia).
 - **Shapes** — square (default) and `-rounded` (with rounded corners).
-- **Formats** — SVG (`../square-icon/svg/`) and PNG (`../square-icon/png/`).
+- **Formats** — SVG (`../assets/square-icon/svg/`) and PNG (`../assets/square-icon/png/`).
 - **Filename pattern** — `fortrabbit-square-mark-{variant}[-rounded].{svg|png}`.
 
 ## Elevation
