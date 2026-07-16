@@ -1,0 +1,254 @@
+/*
+  fortrabbit design tokens — drop-in Tailwind v4 theme
+  ----------------------------------------------------
+  Self-contained. Import once in a Tailwind v4 project:
+
+      @import "tailwindcss";
+      @import "./fortrabbit-theme.css";
+
+  Gives you four colour ROLES as Tailwind scales (main / link / accent / move),
+  each with the full 50…950 range, plus three runtime alternate palettes and a
+  dark-mode helper. Use the role names (bg-main-100, text-link-600), never the
+  raw source scales (slate / fuchsia / cyan / indigo) — that's what lets themes
+  and dark mode swap cleanly.
+
+  Assumes `darkMode: 'class'`. Every colour choice should ship a dark: counterpart.
+
+  See DESIGN.md for how to use the roles (especially link vs move).
+*/
+
+@theme {
+  /* Unset the Tailwind scales fortrabbit doesn't use */
+  --color-lime-*: initial;
+  --color-purple-*: initial;
+  --color-pink-*: initial;
+  --color-violet-*: initial;
+  --color-sky-*: initial;
+  --color-teal-*: initial;
+  --color-emerald-*: initial;
+  --color-amber-*: initial;
+  --color-rose-*: initial;
+  --color-zinc-*: initial;
+  --color-neutral-*: initial;
+  --color-stone-*: initial;
+
+  /* main → slate — neutral surfaces, body text, borders */
+  --color-main-50: var(--color-slate-50);
+  --color-main-100: var(--color-slate-100);
+  --color-main-200: var(--color-slate-200);
+  --color-main-300: var(--color-slate-300);
+  --color-main-400: var(--color-slate-400);
+  --color-main-500: var(--color-slate-500);
+  --color-main-600: var(--color-slate-600);
+  --color-main-700: var(--color-slate-700);
+  --color-main-800: var(--color-slate-800);
+  --color-main-900: var(--color-slate-900);
+  --color-main-950: var(--color-slate-950);
+
+  /* link → fuchsia — real navigation, primary action, focus states */
+  --color-link-50: var(--color-fuchsia-50);
+  --color-link-100: var(--color-fuchsia-100);
+  --color-link-200: var(--color-fuchsia-200);
+  --color-link-300: var(--color-fuchsia-300);
+  --color-link-400: var(--color-fuchsia-400);
+  --color-link-500: var(--color-fuchsia-500);
+  --color-link-600: var(--color-fuchsia-600);
+  --color-link-700: var(--color-fuchsia-700);
+  --color-link-800: var(--color-fuchsia-800);
+  --color-link-900: var(--color-fuchsia-900);
+  --color-link-950: var(--color-fuchsia-950);
+
+  /* accent → cyan — highlights, secondary emphasis, focus outlines */
+  --color-accent-50: var(--color-cyan-50);
+  --color-accent-100: var(--color-cyan-100);
+  --color-accent-200: var(--color-cyan-200);
+  --color-accent-300: var(--color-cyan-300);
+  --color-accent-400: var(--color-cyan-400);
+  --color-accent-500: var(--color-cyan-500);
+  --color-accent-600: var(--color-cyan-600);
+  --color-accent-700: var(--color-cyan-700);
+  --color-accent-800: var(--color-cyan-800);
+  --color-accent-900: var(--color-cyan-900);
+  --color-accent-950: var(--color-cyan-950);
+
+  /* move → indigo — on-page interactivity, alternate accent, ghost hover */
+  --color-move-50: var(--color-indigo-50);
+  --color-move-100: var(--color-indigo-100);
+  --color-move-200: var(--color-indigo-200);
+  --color-move-300: var(--color-indigo-300);
+  --color-move-400: var(--color-indigo-400);
+  --color-move-500: var(--color-indigo-500);
+  --color-move-600: var(--color-indigo-600);
+  --color-move-700: var(--color-indigo-700);
+  --color-move-800: var(--color-indigo-800);
+  --color-move-900: var(--color-indigo-900);
+  --color-move-950: var(--color-indigo-950);
+}
+
+/*
+  Alternate palettes. Each is a full swap of every role, applied by putting the
+  class on the root element (<html> or <body>). In the fortrabbit product a
+  theme switcher toggles these at runtime; an outside build sets the class
+  itself. They look unused to a static scan — they're not.
+
+    dry      — desaturated, warm-neutral
+    fancy    — warm / olive-leaning
+    contrast — high-contrast, blue-forward (accessibility)
+*/
+
+.theme-dry {
+  --color-main-50: oklch(0.97 0.04 440);
+  --color-main-100: oklch(0.94 0.04 440);
+  --color-main-200: oklch(0.87 0.04 440);
+  --color-main-300: oklch(0.79 0.04 440);
+  --color-main-400: oklch(0.65 0.04 440);
+  --color-main-500: oklch(0.53 0.04 440);
+  --color-main-600: oklch(0.43 0.04 440);
+  --color-main-700: oklch(0.35 0.04 440);
+  --color-main-800: oklch(0.27 0.04 440);
+  --color-main-900: oklch(0.22 0.04 440);
+  --color-main-950: oklch(0.18 0.04 440);
+
+  --color-link-50: oklch(0.96 0.4 73);
+  --color-link-100: oklch(0.89 0.4 73);
+  --color-link-200: oklch(0.86 0.4 73);
+  --color-link-300: oklch(0.79 0.4 73);
+  --color-link-400: oklch(0.71 0.4 73);
+  --color-link-500: oklch(0.66 0.4 73);
+  --color-link-600: oklch(0.5 0.4 73);
+  --color-link-700: oklch(0.33 0.4 73);
+  --color-link-800: oklch(0.23 0.4 73);
+  --color-link-900: oklch(0.16 0.4 73);
+  --color-link-950: oklch(0.05 0.4 73);
+
+  --color-move-50: oklch(0.92 0.25 114);
+  --color-move-100: oklch(0.89 0.25 114);
+  --color-move-200: oklch(0.85 0.25 114);
+  --color-move-300: oklch(0.81 0.25 114);
+  --color-move-400: oklch(0.76 0.25 114);
+  --color-move-500: oklch(0.7 0.25 114);
+  --color-move-600: oklch(0.6 0.25 114);
+  --color-move-700: oklch(0.48 0.25 114);
+  --color-move-800: oklch(0.39 0.25 114);
+  --color-move-900: oklch(0.32 0.25 114);
+  --color-move-950: oklch(0.26 0.25 114);
+
+  --color-accent-50: oklch(0.95 0.3 135);
+  --color-accent-100: oklch(0.93 0.3 135);
+  --color-accent-200: oklch(0.91 0.3 135);
+  --color-accent-300: oklch(0.89 0.3 135);
+  --color-accent-400: oklch(0.88 0.3 135);
+  --color-accent-500: oklch(0.73 0.3 135);
+  --color-accent-600: oklch(0.52 0.3 135);
+  --color-accent-700: oklch(0.59 0.3 135);
+  --color-accent-800: oklch(0.47 0.3 135);
+  --color-accent-900: oklch(0.38 0.3 135);
+  --color-accent-950: oklch(0.31 0.3 135);
+}
+
+.theme-fancy {
+  --color-main-50: oklch(0.97 0.04 115);
+  --color-main-100: oklch(0.92 0.04 115);
+  --color-main-200: oklch(0.9 0.04 115);
+  --color-main-300: oklch(0.8 0.04 115);
+  --color-main-400: oklch(0.7 0.04 115);
+  --color-main-500: oklch(0.6 0.04 115);
+  --color-main-600: oklch(0.5 0.04 115);
+  --color-main-700: oklch(0.4 0.04 115);
+  --color-main-800: oklch(0.3 0.04 115);
+  --color-main-900: oklch(0.2 0.04 115);
+  --color-main-950: oklch(0.1 0.04 115);
+
+  --color-link-50: oklch(0.95 0.4 120);
+  --color-link-100: oklch(0.9 0.4 120);
+  --color-link-200: oklch(0.86 0.4 120);
+  --color-link-300: oklch(0.81 0.4 120);
+  --color-link-400: oklch(0.77 0.4 120);
+  --color-link-500: oklch(0.67 0.4 120);
+  --color-link-600: oklch(0.57 0.4 120);
+  --color-link-700: oklch(0.45 0.4 120);
+  --color-link-800: oklch(0.35 0.4 120);
+  --color-link-900: oklch(0.26 0.4 120);
+  --color-link-950: oklch(0.17 0.4 120);
+
+  --color-move-50: oklch(0.94 0.05 66);
+  --color-move-100: oklch(0.87 0.05 66);
+  --color-move-200: oklch(0.83 0.05 66);
+  --color-move-300: oklch(0.78 0.05 66);
+  --color-move-400: oklch(0.71 0.05 66);
+  --color-move-500: oklch(0.63 0.05 66);
+  --color-move-600: oklch(0.54 0.05 66);
+  --color-move-700: oklch(0.43 0.05 66);
+  --color-move-800: oklch(0.35 0.05 66);
+  --color-move-900: oklch(0.3 0.05 66);
+  --color-move-950: oklch(0.25 0.05 66);
+
+  --color-accent-50: oklch(0.94 0.3 80);
+  --color-accent-100: oklch(0.91 0.3 80);
+  --color-accent-200: oklch(0.89 0.3 80);
+  --color-accent-300: oklch(0.87 0.3 80);
+  --color-accent-400: oklch(0.84 0.3 80);
+  --color-accent-500: oklch(0.8 0.3 80);
+  --color-accent-600: oklch(0.68 0.3 80);
+  --color-accent-700: oklch(0.55 0.3 80);
+  --color-accent-800: oklch(0.44 0.3 80);
+  --color-accent-900: oklch(0.36 0.3 80);
+  --color-accent-950: oklch(0.31 0.3 80);
+}
+
+.theme-contrast {
+  --color-main-50: oklch(0.995 0 10);
+  --color-main-100: oklch(0.98 0 10);
+  --color-main-200: oklch(0.96 0 10);
+  --color-main-300: oklch(0.91 0 10);
+  --color-main-400: oklch(0.81 0 10);
+  --color-main-500: oklch(0.7 0 10);
+  --color-main-600: oklch(0.5 0 10);
+  --color-main-700: oklch(0.28 0 10);
+  --color-main-800: oklch(0.19 0 10);
+  --color-main-900: oklch(0.16 0 10);
+  --color-main-950: oklch(0.1 0 10);
+
+  --color-link-50: oklch(0.99 0.1 260);
+  --color-link-100: oklch(0.97 0.2 260);
+  --color-link-200: oklch(0.93 0.25 260);
+  --color-link-300: oklch(0.88 0.3 260);
+  --color-link-400: oklch(0.79 0.3 260);
+  --color-link-500: oklch(0.61 0.3 260);
+  --color-link-600: oklch(0.43 0.3 260);
+  --color-link-700: oklch(0.28 0.3 260);
+  --color-link-800: oklch(0.18 0.3 260);
+  --color-link-900: oklch(0.09 0.3 260);
+  --color-link-950: oklch(0.04 0.3 260);
+
+  --color-move-50: oklch(0.99 0.05 230);
+  --color-move-100: oklch(0.93 0.05 230);
+  --color-move-200: oklch(0.89 0.05 230);
+  --color-move-300: oklch(0.81 0.05 230);
+  --color-move-400: oklch(0.72 0.05 230);
+  --color-move-500: oklch(0.63 0.05 230);
+  --color-move-600: oklch(0.44 0.05 230);
+  --color-move-700: oklch(0.28 0.05 230);
+  --color-move-800: oklch(0.23 0.05 230);
+  --color-move-900: oklch(0.19 0.05 230);
+  --color-move-950: oklch(0.14 0.05 230);
+
+  --color-accent-50: oklch(0.94 0.1 210);
+  --color-accent-100: oklch(0.91 0.1 210);
+  --color-accent-200: oklch(0.89 0.1 210);
+  --color-accent-300: oklch(0.87 0.1 210);
+  --color-accent-400: oklch(0.84 0.1 210);
+  --color-accent-500: oklch(0.8 0.1 210);
+  --color-accent-600: oklch(0.68 0.1 210);
+  --color-accent-700: oklch(0.4 0.1 210);
+  --color-accent-800: oklch(0.3 0.1 210);
+  --color-accent-900: oklch(0.2 0.1 210);
+  --color-accent-950: oklch(0.1 0.1 210);
+}
+
+/* Enables the `theme-contrast:` variant, e.g. theme-contrast:underline */
+@variant theme-contrast {
+  .theme-contrast & {
+    @slot;
+  }
+}

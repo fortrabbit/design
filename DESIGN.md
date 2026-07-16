@@ -4,24 +4,78 @@ Brand identity and design tokens for fortrabbit. This repository is the source o
 
 ## Colors
 
-The palette is drawn from the Tailwind CSS color scale. Each role has a single canonical value — use it across web, print, and product UI.
+fortrabbit works in **roles**, not raw colors. Each role is a full Tailwind scale
+(`50`…`950`) mapped onto a source palette. Refer to the role — `bg-main-100`,
+`text-link-600` — never the underlying scale. That indirection is what lets the alternate
+palettes and dark mode swap cleanly.
 
-- **Link** — fuchsia-500 · `#d946ef` · `oklch(0.667 0.295 322.15)` — primary interactive color, used for hyperlinks and primary calls to action.
-- **Accent** — cyan-400 · `#22d3ee` · `oklch(0.789 0.154 211.53)` — supporting brand accent, used for highlights and secondary emphasis.
-- **Alert** — yellow-300 · `#fde047` · `oklch(0.905 0.182 98.111)` — warnings, notices, and attention states.
-- **Alternate accent** — indigo-500 · `#6366f1` · `oklch(0.585 0.233 277.117)` — alternate emphasis when the primary accent is unsuitable.
+| Role | Default scale | Use for | Brand anchor |
+|---|---|---|---|
+| `main` | slate | Neutral surfaces, body text, borders | `#000` / `#fff` neutrals |
+| `link` | fuchsia | Real navigation, primary action, focus states | `#d946ef` · `oklch(0.667 0.295 322.15)` |
+| `accent` | cyan | Highlights, secondary emphasis, focus outlines | `#22d3ee` · `oklch(0.789 0.154 211.53)` |
+| `move` | indigo | On-page interactivity, alternate accent | `#6366f1` · `oklch(0.585 0.233 277.117)` |
 
-Neutrals: pure black (`#000`) and white (`#fff`) — see the black-and-white wordmark in `fortrabbit-logo-bw.svg`.
+`yellow` (e.g. `yellow-300` · `#fde047`) stays a standalone alert / attention color — it is
+not a role.
+
+The exact values for all four roles, plus the alternate palettes and dark mode, ship as a
+drop-in Tailwind v4 file: [`fortrabbit-theme.css`](fortrabbit-theme.css). Import it after
+Tailwind and you get the role tokens directly. A non-Tailwind build can read the same file
+as a reference table.
+
+### Link vs move — the one rule to get right
+
+Two roles carry interactivity, and keeping them apart matters more than any exact shade:
+
+- **`link`** — links that navigate to another page.
+- **`move`** — on-page interactivity: sorting, toggles, expanders, filters, in-place actions.
+
+Use the tokens directly (`text-link-600`, `text-move-700`, hover a step or two darker).
+Don't reach for a shared `.f-link` helper — the product may drop it in favour of plain
+Tailwind.
+
+### Dark mode & themes
+
+- Assumes `darkMode: 'class'`. Pair every color with a dark counterpart:
+  `bg-main-100 dark:bg-main-900`, `text-main-900 dark:text-main-100`.
+- Three alternate palettes — `dry` (desaturated warm), `fancy` (warm/olive), `contrast`
+  (high-contrast, blue-forward) — are full role swaps toggled by a class on the root
+  element. Optional; only wire them up if the build wants theme switching.
 
 ## Typography
 
-- **Wordmark font** — Georgia, **bold italic** — used only for the HTML wordmark `•fortrabbit`.
-- **Body / UI** — not specified by this repository. Inheriting product surfaces should use their own type scale; the wordmark is the only typographic asset defined here.
+- **Headings** (`h1`–`h5`) — **Hubot Sans**, weights Bold (700) and Medium (500). It's
+  open-source (SIL OFL) from [github/hubot-sans](https://github.com/github/hubot-sans); a
+  CDN copy is on jsDelivr. Wire it up with a plain `@font-face` (two `woff2` weights,
+  `font-display: swap`) and set it on your heading elements. Opt into it elsewhere via a
+  utility class if you want the same "fancy" display feel.
+- **Wordmark font** — Georgia, **bold italic** — used only for the HTML wordmark
+  `•fortrabbit`. Never used for body text.
+- **Body / UI** — not mandated. The consuming build picks its own body face and type scale.
+
+## Sizing
+
+- One size scale runs across sizable elements: `xs | sm | md | lg | xl | 2xl | 3xl | 4xl`
+  (plus `auto`). Default is `md`.
+- Any component with a `size` prop should use this vocabulary — not invented names like
+  `small` / `normal`.
 
 ## Spacing
 
-- **Logo clear space** — generous whitespace on all sides of the wordmark and square mark. No exact ratio is mandated; err toward more rather than less.
-- **Adjacency rule** — no other text or graphic element should sit inside the logo's clear-space buffer.
+- **Page padding** — top-level page padding uses a fluid clamp:
+  `clamp(3rem, 4.6vw, 44rem)`. Reach for that rather than bespoke per-page values.
+- **Logo clear space** — generous whitespace on all sides of the wordmark and square mark.
+  No exact ratio is mandated; err toward more rather than less.
+- **Adjacency rule** — no other text or graphic element should sit inside the logo's
+  clear-space buffer.
+
+## Corners
+
+The UI is **gently rounded, never sharp**. Default to a small radius (`rounded` /
+`rounded-sm`) for most elements, `rounded-md` / `rounded-lg` for cards and larger surfaces,
+and `rounded-full` only for circular things (avatars, pills, status dots). The square brand
+mark also ships a `-rounded` variant. Don't mix wildly different radii in one composition.
 
 ## Components
 
@@ -40,9 +94,24 @@ Square app/social marks for avatars, favicons, and tiles.
 - **Formats** — SVG (`square-icon/svg/`) and PNG (`square-icon/png/`).
 - **Filename pattern** — `fortrabbit-square-mark-{variant}[-rounded].{svg|png}`.
 
+## Focus
+
+Focus states are **accent-based** — an accent outline with a small offset, e.g.
+`focus:outline-accent-400/30 dark:focus:outline-accent-600/30 outline-offset-1
+focus:outline-2`. Treat it as a pattern to reproduce, not a fixed class to import.
+
 ## Elevation
 
 The brand is flat by default — no drop shadows, glows, or depth effects on the logo or marks. When embedded in a UI, the logo should sit on its own layer without elevation styling.
+
+## Beyond tokens
+
+The fortrabbit product is built on a private Vue/Nuxt component library (buttons, lists,
+tables, forms, prose components) that lives in a closed monorepo and can't be imported
+elsewhere. This document captures the **visual schemes** — color, type, sizing, spacing,
+corners, focus — so a separate build can match the *look*, not share the code. For
+long-form content, the product uses the `@tailwindcss/typography` plugin with custom
+overrides; an outside build can get close with the same plugin.
 
 ## Guidelines
 
