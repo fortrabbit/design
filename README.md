@@ -9,4 +9,4 @@ Source of truth for fortrabbit's brand and design tokens.
 - [`docs/web.md`](docs/web.md) — application & website rules (typography, sizing, spacing, corners)
 - [`assets/fortrabbit-theme.css`](assets/fortrabbit-theme.css) — drop-in Tailwind v4 theme with exact values
 
-Logos and marks live in [`assets/`](assets/).
+Logos and marks live in [`assets/`](assets/). Ad artwork and its render script live in [`ads/`](ads/).

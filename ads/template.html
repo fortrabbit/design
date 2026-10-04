@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<!-- Rendered by render.mjs. Open by hand as template.html#terminal-1200x628-A%20different%20kind%20of%20web%20hosting -->
+<style>
+@font-face { font-family: Hubot; src: url(fonts/HubotSans-Bold.woff2); font-weight: 700; }
+:root {
+  --link: #d946ef; --accent: #22d3ee;
+  --main-300: #cbd5e1; --main-500: #64748b; --main-700: #334155; --main-800: #1e293b; --main-950: #020617;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { overflow: hidden; }
+.ad { position: relative; overflow: hidden; }
+.terminal-ad { background: var(--main-800); }
+.headline { position: absolute; font-family: Hubot, sans-serif; font-weight: 700; line-height: 1.08; letter-spacing: -0.01em; color: #fff; }
+.logo { position: absolute; display: block; }
+.logo.white { filter: invert(1); }
+.term {
+  position: absolute; background: var(--main-950); border: 2px solid var(--main-700); border-radius: 14px;
+  font-family: ui-monospace, "SF Mono", Menlo, monospace; color: var(--main-300);
+}
+.term .bar { display: flex; gap: 10px; padding: 18px 22px; border-bottom: 2px solid var(--main-800); }
+.term .bar i { width: 14px; height: 14px; border-radius: 50%; background: var(--main-700); }
+.term .body { padding: 28px 32px; display: flex; flex-direction: column; gap: 18px; }
+.term .prompt { color: var(--main-500); }
+.term .ok { color: var(--accent); }
+.term .done { color: var(--link); font-weight: 700; }
+</style>
+</head>
+<body>
+<script>
+const [variant, size, ...rest] = decodeURIComponent(location.hash.slice(1)).split('-')
+const claim = rest.join('-')
+const [w, h] = size.split('x').map(Number)
+const wide = w / h > 1.5
+const tall = h / w > 1.1
+
+const ad = document.createElement('div')
+ad.className = 'ad'
+ad.style.width = `${w}px`
+ad.style.height = `${h}px`
+document.body.append(ad)
+
+function el(className, style, html = '') {
+  const d = document.createElement('div')
+  d.className = className
+  Object.assign(d.style, style)
+  d.innerHTML = html
+  ad.append(d)
+}
+function logo(style, white = false) {
+  const i = document.createElement('img')
+  i.src = '../assets/fortrabbit-logo-bw.svg'
+  i.className = `logo${white ? ' white' : ''}`
+  Object.assign(i.style, style)
+  ad.append(i)
+}
+
+if (variant === 'terminal') {
+  ad.classList.add('terminal-ad')
+  const pad = wide ? 64 : 80
+  const termSize = wide ? 44 : tall ? 62 : 72
+  const headSize = wide ? 64 : tall ? 88 : 96
+  el('headline', { left: `${pad}px`, top: `${pad}px`, width: wide ? '460px' : `${w - pad * 2}px`, fontSize: `${headSize}px` }, claim)
+  // The terminal bleeds off the right edge so its text can stay large on every format.
+  el('term', wide
+    ? { left: '580px', right: '-160px', top: '50%', transform: 'translateY(-50%)', fontSize: `${termSize}px` }
+    : { left: `${pad}px`, right: '-240px', top: '50%', transform: 'translateY(-36%)', fontSize: `${termSize}px` },
+    `<div class="bar"><i></i><i></i><i></i></div><div class="body">
+      <div><span class="prompt">$</span> git push</div>
+      <div class="ok">✓ composer install</div>
+      <div class="ok">✓ npm run build</div>
+      <div class="done">✓ deployed</div>
+    </div>`)
+  logo(wide
+    ? { width: '380px', left: `${pad}px`, bottom: `${pad}px` }
+    : { width: tall ? '560px' : '600px', left: `${pad}px`, bottom: tall ? '90px' : '64px' }, true)
+}
+
+if (variant === 'logo') {
+  ad.style.background = '#fff'
+  if (wide) logo({ width: `${w * 0.86}px`, left: `${w * 0.07}px`, top: `${(h - w * 0.86 * 300 / 1325) / 2}px` })
+  else el('', { position: 'absolute', inset: 0, background: 'url(../assets/square-icon/svg/fortrabbit-square-mark-colorful.svg) center/cover' })
+}
+</script>
+</body>
+</html>
