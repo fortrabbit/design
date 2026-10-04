@@ -61,8 +61,9 @@ if (variant === 'terminal') {
   ad.classList.add('terminal-ad')
   const pad = wide ? 64 : 80
   const termSize = wide ? 44 : tall ? 62 : 72
-  const headSize = wide ? 64 : tall ? 88 : 96
-  el('headline', { left: `${pad}px`, top: `${pad}px`, width: wide ? '460px' : `${w - pad * 2}px`, fontSize: `${headSize}px` }, claim)
+  const headSize = wide ? 58 : tall ? 88 : 96
+  // A comma in a claim marks its line break, so the phrase splits where it reads.
+  el('headline', { left: `${pad}px`, top: `${pad}px`, width: wide ? '500px' : `${w - pad * 2}px`, fontSize: `${headSize}px` }, claim.includes(', ') ? claim.split(', ').map((part) => `<span style="white-space: nowrap">${part}</span>`).join(',<br>') : claim)
   // The terminal bleeds off the right edge so its text can stay large on every format.
   el('term', wide
     ? { left: '580px', right: '-160px', top: '50%', transform: 'translateY(-50%)', fontSize: `${termSize}px` }

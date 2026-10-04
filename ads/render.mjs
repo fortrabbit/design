@@ -1,3 +1,4 @@
+import { execFileSync } from 'node:child_process';
 import { chromium } from 'playwright';
 import { mkdirSync, readFileSync, rmSync } from 'node:fs';
 import { dirname, join } from 'node:path';
@@ -30,3 +31,6 @@ for (const { hash, file } of jobs) {
   console.log(file);
 }
 await browser.close();
+
+// Flat colors quantize without visible loss; Google re-encodes for serving, the smaller files only help the repo.
+execFileSync('pngquant', ['--force', '--ext', '.png', '--quality', '80-100', '--skip-if-larger', ...jobs.map(({ file }) => join(out, file))]);

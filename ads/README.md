@@ -27,7 +27,7 @@ The headlines come from [`claims.json`](claims.json), picked from the rotating c
 - Focus on PHP, not PHP hosting
 - Go ahead, ditch your VPS
 
-A claim has to fit in three lines on 1200×628, so roughly 35 characters at most. Add more from `ClaimRotate.vue` to test them: one responsive display ad rotates up to 15 images, and Google reports which ones perform.
+A claim has to fit in three lines on 1200×628, so roughly 35 characters at most. A comma sets the line break. Add more from `ClaimRotate.vue` to test them: one responsive display ad rotates up to 15 images, and Google reports which ones perform.
 
 ## Formats
 
@@ -43,7 +43,7 @@ Google may reject or limit images where text covers more than about 20% of the a
 
 ## Render
 
-Needs Node and the Playwright Chromium build.
+Needs Node, the Playwright Chromium build and `pngquant` (`brew install pngquant`).
 
 ```sh
 cd ads
@@ -53,7 +53,3 @@ npm run render
 ```
 
 `render.mjs` opens [`template.html`](template.html) once per claim and size and writes the PNGs to `display/`, replacing what was there. To preview one by hand, open `template.html#terminal-1200x628-PHP as a service` in a browser.
-
-## Upload
-
-Google Ads → Campaigns → `display-remarketing` → Ads → responsive display ad → Images and Logos. Upload the landscape, square and portrait images of each claim plus both logos. Headlines and descriptions are text fields in the ad itself, not part of the images.
